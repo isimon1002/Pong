@@ -1,5 +1,22 @@
 window.onload = function() {
-  render();
+    animate(step);
+};
+
+window.addEventListener('keydown', function(event){
+  if(event.key == "ArrowUp"){
+    player.paddle.move(-2)
+  }
+  else if (event.key == "ArrowDown") {
+      player.paddle.move(2)
+  }
+});
+
+var animate = window.requestAnimationFrame ||
+    function(callback) { window.setTimeout(callback, 1000/60) };
+
+function step(){
+    render();
+    animate(step);
 };
 
 var ta = document.getElementById('table');
@@ -18,23 +35,38 @@ var render = function() {
   ball.render();
 };
 
-function Paddle(x, y, width, height) {
+function Paddle(x, y) {
   this.x = x;
   this.y = y;
-  this.width = width;
-  this.height = height;
+  this.width = 10;
+  this.height = 50;
+  this.ySpeed = 0;
+  this.xSpeed = 0;
 }
 
 Paddle.prototype.render = function() {
   table.fillRect(this.x, this.y, this.width, this.height);
 };
 
+Paddle.prototype.move = function(y) {
+  if(this.y <= 10 || this.y >= 560){
+    this.ySpeed = 0;
+  }
+  else{
+    this.ySpeed = y
+    this.y += y;
+    if(this.height != 50){
+      this.height = 50
+    }
+  }
+}
+
 function Player() {
-  this.paddle = new Paddle(1165, 275, 10, 50);
+  this.paddle = new Paddle(1165, 300);
 }
 
 function Computer() {
-  this.paddle = new Paddle(175, 275, 10, 50);
+  this.paddle = new Paddle(175, 275);
 }
 
 Player.prototype.render = function() {
