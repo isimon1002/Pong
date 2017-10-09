@@ -25,28 +25,7 @@ var step = function() {
 //update canvas
 var update = function() {
   player.update();
-  // computer.update(ball);
-  // ball.update(player.paddle, computer.paddle, scoreComputer, scorePlayer);
-  // scoreComputer.update();
-  // scorePlayer.update();
 };
-
-
-// Computer.prototype.update = function(ball) {
-//   var x_pos = ball.x;
-//   var diff = -((this.paddle.x + (this.paddle.width / 2)) - x_pos);
-//   if(diff < 0 && diff < -4) { // max speed left
-//     diff = -5;
-//   } else if(diff > 0 && diff > 4) { // max speed right
-//     diff = 5;
-//   }
-//   this.paddle.move(diff, 0);
-//   if(this.paddle.x < 0) {
-//     this.paddle.x = 0;
-//   } else if (this.paddle.x + this.paddle.width > 400) {
-//     this.paddle.x = 400 - this.paddle.width;
-//   }
-// };
 
 Player.prototype.update = function() {
   for(var key in keysDown) {
@@ -76,58 +55,10 @@ Paddle.prototype.move = function(x, y) {
   }
 }
 
-// Ball.prototype.update = function(paddle1, paddle2, score) {
-//   this.x += this.x_speed;
-//   this.y += this.y_speed;
-//   var top_x = this.x - 5;
-//   var top_y = this.y - 5;
-//   var bottom_x = this.x + 5;
-//   var bottom_y = this.y + 5;
-//
-//   if(this.x - 5 < 0) { // contact with left wall
-//     this.x = 5;
-//     this.x_speed = -this.x_speed;
-//   } else if(this.x + 5 > 400) { // contact with right wall
-//     this.x = 395;
-//     this.x_speed = -this.x_speed;
-//   }
-//
-//   if(this.y < 0 || this.y > 600) { // score
-//     this.x_speed = 0;
-//     this.y_speed = 3;
-//
-//     if(this.y < 0) {
-//       scorePlayer.incrementPlayerScore();
-//     }
-//     if(this.y > 600) {
-//       scoreComputer.incrementComputerScore();
-//     }
-//     this.x = 200;
-//     this.y = 300;
-//   }
-//
-//   if(top_y > 300) {
-//     if(top_y < (paddle1.y + paddle1.height) && bottom_y > paddle1.y && top_x < (paddle1.x + paddle1.width) && bottom_x > paddle1.x) {
-//       // hit the player's paddle
-//       this.y_speed = -3;
-//       this.x_speed += (paddle1.x_speed / 2);
-//       this.y += this.y_speed;
-//     }
-//   } else {
-//     if(top_y < (paddle2.y + paddle2.height) && bottom_y > paddle2.y && top_x < (paddle2.x + paddle2.width) && bottom_x > paddle2.x) {
-//       // hit the computer's paddle
-//       this.y_speed = 3;
-//       this.x_speed += (paddle2.x_speed / 2);
-//       this.y += this.y_speed;
-//     }
-//   }
-// };
 
 var player = new Player();
 var computer = new Computer();
 var ball = new Ball(200, 300);
-// var scoreComputer = new ScoreComputer();
-// var scorePlayer = new ScorePlayer();
 
 //render canvas elements
 var render = function() {
@@ -136,10 +67,6 @@ var render = function() {
   player.render();
   computer.render();
 };
-  // ball.render();
-  // scoreComputer.render();
-  // scorePlayer.render();
-
 
 //paddle features
 function Paddle(x, y, width, height) {
@@ -193,51 +120,6 @@ Ball.prototype.render = function() {
   context.fill();
 };
 
-//computer score
-// function ScoreComputer() {
-//   this.computerScore = 0;
-// }
-//
-// //player score
-// function ScorePlayer() {
-//   this.playerScore = 0;
-// }
-
-//computer win
-// ScoreComputer.prototype.update = function() {
-//   if(this.computerScore === 10) {
-//     alert("You Lost!");
-//     location.reload();
-//   }
-// }
-//
-// //player win
-// ScorePlayer.prototype.update = function() {
-//   if(this.playerScore === 10) {
-//     alert("You Won!");
-//     location.reload();
-//   }
-// }
-//
-// ScoreComputer.prototype.incrementComputerScore = function() {
-//   this.computerScore++;
-// }
-//
-// ScorePlayer.prototype.incrementPlayerScore = function() {
-//   this.playerScore++;
-// }
-//
-// ScoreComputer.prototype.render = function() {
-//   context.font = "20px comic sans";
-//   context.fillStyle = "red";
-//   context.fillText(this.computerScore, 10, 30);
-// }
-//
-// ScorePlayer.prototype.render = function() {
-//   context.font = "20px comic sans";
-//   context.fillStyle = "blue";
-//   context.fillText(this.playerScore, 10, 585);
-// }
 
 var keysDown = {};
 
