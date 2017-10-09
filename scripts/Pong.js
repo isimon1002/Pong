@@ -1,70 +1,39 @@
-// var animate = window.requestAnimationFrame ||
-//     function(callback) { window.setTimeout(callback, 1000/60) };
-var animate = window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
-  function(callback) { window.setTimeout(callback, 100/60) };
-
-var canvas = document.createElement('canvas');
-var width =  1000;
-var height = 600;
-canvas.width = width;
-canvas.height = height;
-var table = canvas.getContext('2d');
-
 window.onload = function() {
-    document.body.appendChild(canvas);
     animate(step);
 };
 
+window.addEventListener('keydown', function(event){
+  if(event.key == "ArrowUp"){
+    player.paddle.move(-2)
+  }
+  else if (event.key == "ArrowDown") {
+      player.paddle.move(2)
+  }
+});
+
+var animate = window.requestAnimationFrame ||
+    function(callback) { window.setTimeout(callback, 1000/60) };
 
 function step(){
-    update();
     render();
     animate(step);
 };
 
-//update canvas
-var update = function() {
-  player.update();
-};
-
-Player.prototype.update = function() {
-  for(var key in keysDown) {
-    var value = Number(key);
-    if(value == 38) { // up arrow key identifier
-      this.paddle.move(0, -4);
-    } else if (value == 40) { // down arrow key identifier
-      this.paddle.move(0, 4);
-    } else {
-      this.paddle.move(0, 0);
-    }
-  }
-};
-
-Paddle.prototype.move = function(x, y) {
-  this.x += x;
-  this.y += y;
-  this.x_speed = x;
-  this.y_speed = y;
-  if(this.y < 0) { //top side of canvas
-    this.x = 0;
-    this.x_speed = 0;
-  } else if (this.y + this.height > 600) { //bottom side of canvas
-    this.x = 0;
-    this.x = 600 - this.width;
-    this.x_speed = 0;
-  }
-}
-
+var ta = document.getElementById('table');
+var width =  1000;
+var height = 600;
+var table = ta.getContext('2d');
+var ta2 = document.getElementById('table2');
+var width =  1000;
+var height = 600;
+var table2 = ta.getContext('2d');
 var player = new Player();
 var computer = new Computer();
 var ball = new Ball(675, 300);
 
-
 var render = function() {
-  table.rect(0, 0, width, height);
-  table.stroke();
+  table.fillStyle = "black"
+  table.fillRect(0, 0, width, height);  //This is where the issue was.  I do not know why, but table.rect caused the problems.
   player.render();
   computer.render();
   ball.render();
@@ -83,13 +52,31 @@ Paddle.prototype.render = function() {
   table.fillRect(this.x, this.y, this.width, this.height);
 };
 
+Paddle.prototype.move = function(y) {
+  if(this.y < 0){
+    this.y = 0
+    console.log(this.y)
+    console.log(this.height)
+  }
+  else if(this.y > 549){
+    this.y = 549;
+    console.log(this.y)
+    console.log(this.height)
+  }
+  else{
+    this.ySpeed = y
+    this.y += y;
+    console.log(this.y)
+    console.log(this.height)
+  }
+}
 
 function Player() {
-  this.paddle = new Paddle(990, 300, 10, 50);
+  this.paddle = new Paddle(990, 275);
 }
 
 function Computer() {
-  this.paddle = new Paddle(0, 275, 10, 50);
+  this.paddle = new Paddle(0, 275);
 }
 
 Player.prototype.render = function() {
@@ -114,15 +101,3 @@ Ball.prototype.render = function() {
   table.fillStyle = "#000000";
   table.fill();
 };
-
-var keysDown = {};
-
-//if key is pressed
-window.addEventListener("keydown", function(event) {
-  keysDown[event.keyCode] = true;
-});
-
-//if key is let go
-window.addEventListener("keyup", function(event) {
-  delete keysDown[event.keyCode];
-});
