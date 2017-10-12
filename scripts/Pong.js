@@ -147,10 +147,18 @@ function ScorePlayer() {
 
  ScorePlayer.prototype.incrementPlayerScore = function() {
   this.playerScore++;
+  if(this.playerScore == 11){
+    alert("Congratulations!!  You Win!!")
+    location.reload()
+  }
 }
 
 ScoreComputer.prototype.incrementComputerScore = function() {
   this.computerScore++;
+  if(this.computerScore == 11){
+    alert("You Lose.  SAD!!")
+    location.reload()
+  }
 }
 
 function ScoreComputer(){
@@ -160,7 +168,7 @@ function ScoreComputer(){
 ScorePlayer.prototype.render = function() {
   table.font = "35px Arial";
   table.fillStyle = "white";
-  table.fillText(this.playerScore, 975, 35);
+  table.fillText(this.playerScore, 955, 35);
 }
 
 ScoreComputer.prototype.render = function(){
