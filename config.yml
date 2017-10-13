@@ -1,2 +1,2 @@
-baseurl: "" # the subpath of your site, e.g. /blog/ (optional)
-url: "https://isimon1002.github.io/ponge" # the base hostname & protocol for your site
+baseurl: "/home.html/" # the subpath of your site, e.g. /blog/ (optional)
+url: "https://isimon1002.github.io/pong" # the base hostname & protocol for your site
