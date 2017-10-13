@@ -89,7 +89,7 @@ Ball.prototype.move = function(pPaddle, cPaddle){
         pPaddle.y < top_y + 10 &&
         pPaddle.height + pPaddle.y > top_y){  // hit the player's paddle
           this.xSpeed = -4;
-          this.ySpeed += (pPaddle.ySpeed / 2);
+          this.ySpeed += (pPaddle.ySpeed);
           this.x += this.xSpeed;
         }
     if(top_x > 1000){
@@ -108,7 +108,7 @@ else {
       cPaddle.y < top_y + 10 &&
       cPaddle.height + cPaddle.y > top_y){   // hit the computer's paddle
         this.xSpeed = 4;
-        this.ySpeed += (cPaddle.ySpeed / 2);
+        this.ySpeed += (cPaddle.ySpeed);
         this.x += this.xSpeed;
     }
     if(top_x < 0){
