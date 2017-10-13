@@ -124,11 +124,11 @@ else {
 Computer.prototype.update = function(ball){
   var y_ball = ball.y;
   var diff = -((this.paddle.y + (this.paddle.width / 2)) - y_ball);
-  if(diff > 3){
-    diff = 3;
+  if(diff > 5){
+    diff = 5;
   }
-  else if(diff < -3){
-    diff = -3;
+  else if(diff < -5){
+    diff = -5;
   }
   computer.paddle.move(diff)
 }

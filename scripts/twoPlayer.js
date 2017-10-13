@@ -11,11 +11,21 @@ window.addEventListener('keydown', function(event){
   }
 });
 
+window.addEventListener('keydown', function(event){
+  if(event.key == "w"){
+    computer.paddle.move(-5)
+  }
+  else if (event.key == "s") {
+      computer.paddle.move(5)
+  }
+});
+
+
 var animate = window.requestAnimationFrame ||
     function(callback) { window.setTimeout(callback, 1000/60) };
 
 function step(){
-    computer.update(ball)
+    //computer.update(ball)
     ball.move(player.paddle, computer.paddle);
     render();
     animate(step);
@@ -121,17 +131,17 @@ else {
   }
 };
 
-Computer.prototype.update = function(ball){
-  var y_ball = ball.y;
-  var diff = -((this.paddle.y + (this.paddle.width / 2)) - y_ball);
-  if(diff > 3){
-    diff = 3;
-  }
-  else if(diff < -3){
-    diff = -3;
-  }
-  computer.paddle.move(diff)
-}
+// Computer.prototype.update = function(ball){
+//   var y_ball = ball.y;
+//   var diff = -((this.paddle.y + (this.paddle.width / 2)) - y_ball);
+//   if(diff > 3){
+//     diff = 3;
+//   }
+//   else if(diff < -3){
+//     diff = -3;
+//   }
+//   computer.paddle.move(diff)
+// }
 
 function Player() {
   this.paddle = new Paddle(990, 275);
