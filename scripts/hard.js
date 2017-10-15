@@ -4,10 +4,10 @@ window.onload = function() {
 
 window.addEventListener('keydown', function(event){
   if(event.key == "ArrowUp"){
-    player.paddle.move(-5)
+    player.paddle.move(-6)
   }
   else if (event.key == "ArrowDown") {
-      player.paddle.move(5)
+      player.paddle.move(6)
   }
 });
 
@@ -88,14 +88,14 @@ Ball.prototype.move = function(pPaddle, cPaddle){
         pPaddle.x + pPaddle.width > top_x &&
         pPaddle.y < top_y + 10 &&
         pPaddle.height + pPaddle.y > top_y){  // hit the player's paddle
-          this.xSpeed = -4;
+          this.xSpeed = -8;
           this.ySpeed += (pPaddle.ySpeed);
           this.x += this.xSpeed;
         }
     if(top_x > 1000){
       this.x = 500;
       this.y = 300;
-      this.xSpeed = 4;
+      this.xSpeed = 6;
       this.ySpeed = 0;
       pPaddle.x = 990;
       pPaddle.y = 275;
@@ -107,14 +107,14 @@ else {
       cPaddle.x + cPaddle.width > top_x &&
       cPaddle.y < top_y + 10 &&
       cPaddle.height + cPaddle.y > top_y){   // hit the computer's paddle
-        this.xSpeed = 4;
+        this.xSpeed = 8;
         this.ySpeed += (cPaddle.ySpeed);
         this.x += this.xSpeed;
     }
     if(top_x < 0){
       this.x = 500;
       this.y = 300;
-      this.xSpeed = 4;
+      this.xSpeed = 6;
       this.ySpeed = 0;
       pPaddle.x = 990;
       pPaddle.y = 275;
@@ -126,11 +126,11 @@ else {
 Computer.prototype.update = function(ball){
   var y_ball = ball.y;
   var diff = -((this.paddle.y + (this.paddle.width / 2)) - y_ball);
-  if(diff > 5){
-    diff = 5;
+  if(diff > 6){
+    diff = 6;
   }
-  else if(diff < -5){
-    diff = -5;
+  else if(diff < -6){
+    diff = -6;
   }
   computer.paddle.move(diff)
 }
@@ -192,7 +192,7 @@ Computer.prototype.render = function() {
 function Ball(x, y) {
   this.x = x;
   this.y = y;
-  this.xSpeed = 4;
+  this.xSpeed = 6;
   this.ySpeed = 0;
   this.radius = 5;
 }
