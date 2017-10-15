@@ -4,10 +4,10 @@ window.onload = function() {
 
 window.addEventListener('keydown', function(event){
   if(event.key == "ArrowUp"){
-    player.paddle.move(-6)
+    player.paddle.move(-8)
   }
   else if (event.key == "ArrowDown") {
-      player.paddle.move(6)
+      player.paddle.move(8)
   }
 });
 
@@ -126,11 +126,11 @@ else {
 Computer.prototype.update = function(ball){
   var y_ball = ball.y;
   var diff = -((this.paddle.y + (this.paddle.width / 2)) - y_ball);
-  if(diff > 6){
-    diff = 6;
+  if(diff > 8){
+    diff = 8;
   }
-  else if(diff < -6){
-    diff = -6;
+  else if(diff < -8){
+    diff = -8;
   }
   computer.paddle.move(diff)
 }
