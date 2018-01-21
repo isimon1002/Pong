@@ -109,6 +109,8 @@ Ball.prototype.move = function(pPaddle, cPaddle){
       this.ySpeed = 0;
       pPaddle.x = 990;
       pPaddle.y = 275;
+      cPaddle.x = 0;
+      cPaddle.y = 275;
       scoreComputer.incrementComputerScore();
     }
    }
@@ -128,6 +130,8 @@ else {
       this.ySpeed = 0;
       pPaddle.x = 990;
       pPaddle.y = 275;
+      cPaddle.x = 0;
+      cPaddle.y = 275;
       scorePlayer.incrementPlayerScore();
     }
   }

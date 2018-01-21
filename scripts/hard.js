@@ -32,6 +32,7 @@ var computer = new Computer();
 var ball = new Ball(500, 300);
 var scorePlayer = new ScorePlayer();
 var scoreComputer = new ScoreComputer();
+var count = 1;
 
 var render = function() {
   table.fillStyle = "black"
@@ -88,18 +89,23 @@ Ball.prototype.move = function(pPaddle, cPaddle){
         pPaddle.x + pPaddle.width > top_x &&
         pPaddle.y < top_y + 10 &&
         pPaddle.height + pPaddle.y > top_y){  // hit the player's paddle
-          this.xSpeed = -8;
+          this.xSpeed = -8 - count;
           this.ySpeed += (pPaddle.ySpeed);
           this.x += this.xSpeed;
+          count ++;
+          console.log(this.xSpeed)
         }
     if(top_x > 1000){
       this.x = 500;
       this.y = 300;
-      this.xSpeed = 6;
+      this.xSpeed = 8;
       this.ySpeed = 0;
       pPaddle.x = 990;
       pPaddle.y = 275;
+      cPaddle.x = 0;
+      cPaddle.y = 275;
       scoreComputer.incrementComputerScore();
+      count = 0
     }
    }
 else {
@@ -107,18 +113,22 @@ else {
       cPaddle.x + cPaddle.width > top_x &&
       cPaddle.y < top_y + 10 &&
       cPaddle.height + cPaddle.y > top_y){   // hit the computer's paddle
-        this.xSpeed = 8;
+        this.xSpeed = 8 + count;
         this.ySpeed += (cPaddle.ySpeed);
         this.x += this.xSpeed;
+        count ++;
     }
-    if(top_x < 0){
+    if(top_x < -10){
       this.x = 500;
       this.y = 300;
-      this.xSpeed = 6;
+      this.xSpeed = 8;
       this.ySpeed = 0;
       pPaddle.x = 990;
       pPaddle.y = 275;
+      cPaddle.x = 0;
+      cPaddle.y = 275;
       scorePlayer.incrementPlayerScore();
+      count = 0
     }
   }
 };
